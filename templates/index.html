@@ -1,0 +1,62 @@
+{% extends 'layaout/layaout.html' %} 
+{% block titulo %} Contactos{% endblock %} 
+
+{% block contenido %}
+
+  
+  <div class="row justify-content-md-center mb-3">
+    <div class="col-md-10 m-5">
+      
+          {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+              
+              {% for category,message in messages %}
+              
+              <div class="alert alert-{{category}} alert-dismissible fade show" role="alert">
+                  <strong>{{message}}</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+              </div>
+
+              {% endfor %}
+
+          {% endif %}
+          {% endwith %}
+          <table  class="table table-bordered ">
+            <thead class="table-light">
+                <tr >
+                    <th>Identificacion</th>
+                    <th>Nombre Completo</th>
+                    <th>E-mail</th>
+                    <th>Movil</th>
+                    <th colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for contacto in contactos %}
+              <tr >
+                <td>{{ contacto[1] }}</td>
+                <td>{{ contacto[2] }} {{ contacto[3] }}</td>
+                <td>{{ contacto[4] }}</td>
+                <td>{{ contacto[5] }}</td>
+                <td >
+                    <form method="POST" action="{{url_for('contact_edit')}}" >
+                      <input type="hidden" value="{{contacto[0]}}" name="id" id="=id">
+                      <input  class="btn btn-success" type="submit" value="Editar">
+                    </form>
+                </td>
+                <td >
+                  <form action="{{ url_for('delete_contact') }}" method="post">
+                    <input type="hidden" value="{{contacto[0]}}" name="id" id="=id">
+                    <input class="btn btn-danger" type="submit" value="Eliminar" onclick="return confirm('Deseas Eliminar?');">
+                  </form>                  
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+        </table>
+          
+      </div>
+  </div>
+</div>
+
+{% endblock%}

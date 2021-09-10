@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+    <script src="{{url_for('static',filename='js/bootstrap.js')}}"></script>
+    <script src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+
+  </head>
+
+    <ul class="nav nav-tabs" style="background: linear-gradient(to right, #aaeb54, #65b645)">
+      <li class="nav-item">
+        <a class="nav-link {{active[0]}}" aria-current="page" href="{{url_for('index')}}">Listado usuarios</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{active[1]}}" href="{{url_for('create')}}">Crear</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Editar</a>
+      </li>
+    </ul>
+    <body style="background: linear-gradient(to right, #aec2d8d5, #478edf)">
+
+    
+    <div class="container " >{% block contenido %}{% endblock %}</div>
+      
+    </body>
+</html>
